@@ -9,6 +9,8 @@ import {
 import logoSrc from '@assets/g-dot-1024_1787901439446.png';
 import { encodeQr } from '@/lib/qr';
 
+const CACHE_VERSION = 'V22';
+
 const VCARD = [
   'BEGIN:VCARD',
   'VERSION:3.0',
@@ -263,6 +265,9 @@ function Home() {
           <div className="qr-wrap">
             <div className="qr-box"><QrCodeGraphic matrix={matrix} /></div>
           </div>
+          <span className="cache-version" aria-label={`Cache version ${CACHE_VERSION}`}>
+            {CACHE_VERSION}
+          </span>
         </button>
       </section>
 

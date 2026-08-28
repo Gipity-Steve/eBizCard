@@ -204,6 +204,21 @@ button { font: inherit; -webkit-tap-highlight-color: transparent; }
   display: block;
   shape-rendering: crispEdges;
 }
+.cache-version {
+  position: absolute;
+  right: max(10px, env(safe-area-inset-right));
+  bottom: max(8px, env(safe-area-inset-bottom));
+  z-index: 2;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  line-height: 1;
+  opacity: .8;
+  pointer-events: none;
+  text-transform: uppercase;
+}
 .toast {
   position: fixed;
   z-index: 10;
