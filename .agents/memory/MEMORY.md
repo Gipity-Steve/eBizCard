@@ -1,0 +1,1 @@
+- [QR payload capacity](qr-payload-capacity.md) — Never use a fixed QR version without checking byte capacity; truncation can produce a visually valid but unreadable code.
