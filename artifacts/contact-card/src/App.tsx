@@ -1,6 +1,7 @@
 import { useMemo, useRef, useState } from 'react';
 import {
   Globe2,
+  Linkedin,
   Mail,
   MessageCircle,
   Phone,
@@ -18,6 +19,7 @@ TITLE:Interim Tech Co-founder
 URL:https://www.gipity.com
 TEL;TYPE=CELL;TYPE=VOICE;TYPE=PREF:+447415978029
 URL;TYPE=WhatsApp:https://wa.me/447415978029
+URL;TYPE=LinkedIn:https://www.linkedin.com/in/stephencharlesprocter
 END:VCARD`;
 
 const contact = {
@@ -27,6 +29,7 @@ const contact = {
   email: 'steve@gipity.com',
   phone: '+44 7415 978029',
   website: 'www.gipity.com',
+  linkedin: 'linkedin.com/in/stephencharlesprocter',
   whatsapp: 'WhatsApp',
 };
 
@@ -58,17 +61,6 @@ function QrCodeGraphic({ matrix }: { matrix: boolean[][] }) {
       )}
     </svg>
   );
-}
-
-function downloadBlob(blob: Blob, filename: string) {
-  const url = URL.createObjectURL(blob);
-  const anchor = document.createElement('a');
-  anchor.href = url;
-  anchor.download = filename;
-  document.body.appendChild(anchor);
-  anchor.click();
-  anchor.remove();
-  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 function downloadDataUrl(dataUrl: string, filename: string) {
@@ -113,7 +105,7 @@ function drawCardPng(
 ) {
   const scale = 2;
   const width = 1000;
-  const height = 1400;
+  const height = 1800;
   const canvas = document.createElement('canvas');
   canvas.width = width * scale;
   canvas.height = height * scale;
@@ -122,7 +114,7 @@ function drawCardPng(
 
   ctx.save();
   ctx.scale(scale, scale);
-  ctx.fillStyle = '#f1eee3';
+  ctx.fillStyle = '#fbf8ef';
   ctx.fillRect(0, 0, width, height);
 
   ctx.strokeStyle = 'rgba(70, 91, 112, .1)';
@@ -140,22 +132,17 @@ function drawCardPng(
     ctx.stroke();
   }
 
-  ctx.fillStyle = '#fbf8ef';
-  ctx.fillRect(55, 55, 890, 1290);
-  ctx.strokeStyle = 'rgba(17, 24, 23, .16)';
-  ctx.strokeRect(55.5, 55.5, 889, 1289);
-
   if (logo?.complete && logo.naturalWidth > 0) {
     ctx.drawImage(logo, 100, 88, 92, 92);
   }
   ctx.fillStyle = '#111817';
   ctx.font = '800 30px Arial, sans-serif';
-  ctx.fillText('GIPITY.', 100, 155);
+  ctx.fillText('Gipity', 220, 155);
   ctx.fillStyle = '#ff5d0a';
-  ctx.fillText('.', 228, 155);
+  ctx.fillText('.', 308, 155);
   ctx.fillStyle = '#526b83';
   ctx.font = '500 18px Arial, sans-serif';
-  ctx.fillText('PRODUCT STUDIO', 100, 188);
+  ctx.fillText('PRODUCT STUDIO', 220, 188);
 
   ctx.fillStyle = '#111817';
   ctx.font = '400 76px Georgia, serif';
@@ -174,22 +161,34 @@ function drawCardPng(
 
   ctx.strokeStyle = 'rgba(17, 24, 23, .18)';
   ctx.lineWidth = 1;
-  [625, 705, 785].forEach((lineY) => {
+  const detailRows = [
+    [625, contact.email],
+    [705, contact.phone],
+    [785, contact.website],
+    [865, contact.linkedin],
+    [945, contact.whatsapp],
+  ] as const;
+  detailRows.forEach(([lineY, value]) => {
     ctx.beginPath();
     ctx.moveTo(100, lineY);
     ctx.lineTo(900, lineY);
     ctx.stroke();
+    ctx.fillStyle = '#111817';
+    ctx.font = '600 24px Arial, sans-serif';
+    ctx.fillText(value, 145, lineY + 49);
   });
-  ctx.fillStyle = '#111817';
-  ctx.font = '600 24px Arial, sans-serif';
-  ctx.fillText(contact.email, 145, 674);
-  ctx.fillText(contact.phone, 145, 754);
-  ctx.fillText(contact.website, 145, 834);
 
-  drawQr(ctx, matrix, 300, 910, 400);
+  drawQr(ctx, matrix, 100, 1080, 480);
   ctx.fillStyle = '#526b83';
   ctx.font = '700 18px Arial, sans-serif';
-  ctx.fillText('POINT YOUR CAMERA HERE', 300, 1350);
+  ctx.fillText('POINT YOUR CAMERA HERE', 620, 1230);
+  ctx.font = '500 16px Arial, sans-serif';
+  ctx.fillText('The QR contains the full vCard', 620, 1270);
+  ctx.fillText('including Steve’s LinkedIn profile.', 620, 1300);
+  ctx.fillStyle = '#526b83';
+  ctx.font = '700 18px Arial, sans-serif';
+  ctx.fillText('GIPITY / 2026', 100, 1695);
+  ctx.fillText('STEVE.PROCTER', 760, 1695);
   ctx.restore();
 
   const dataUrl = canvas.toDataURL('image/png');
@@ -258,6 +257,10 @@ function Home() {
             <div className="detail-link" data-testid="link-website">
               <Globe2 size={18} strokeWidth={1.7} />
               <span>{contact.website}</span>
+            </div>
+            <div className="detail-link" data-testid="link-linkedin">
+              <Linkedin size={18} strokeWidth={1.7} />
+              <span>{contact.linkedin}</span>
             </div>
             <div className="detail-link" data-testid="link-whatsapp">
               <MessageCircle size={18} strokeWidth={1.7} />
