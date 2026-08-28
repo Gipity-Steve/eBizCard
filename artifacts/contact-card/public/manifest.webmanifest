@@ -1,11 +1,11 @@
 {
-  "name": "Steve Procter — Contact Card",
-  "short_name": "Steve Procter",
+  "name": "eBizCard",
+  "short_name": "eBizCard",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#e8e4d8",
   "theme_color": "#173b3a",
-  "description": "The private professional contact card for Steve Procter.",
+  "description": "A shareable contact card designed for offline access.",
   "icons": [
     {
       "src": "./favicon.svg",

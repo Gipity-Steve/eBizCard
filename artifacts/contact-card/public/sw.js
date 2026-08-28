@@ -1,4 +1,4 @@
-const CACHE = "steve-contact-card-v9";
+const CACHE = "ebizcard-v10";
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.add("./")));
   self.skipWaiting();
