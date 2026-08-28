@@ -1,4 +1,4 @@
-const CACHE = "ebizcard-v22";
+const CACHE = "ebizcard-v23";
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.add("./")));
   self.skipWaiting();

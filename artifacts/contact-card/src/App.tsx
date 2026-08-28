@@ -9,7 +9,7 @@ import {
 import logoSrc from '@assets/g-dot-1024_1787901439446.png';
 import { encodeQr } from '@/lib/qr';
 
-const CACHE_VERSION = 'V22';
+const CACHE_VERSION = 'V23';
 
 const VCARD = [
   'BEGIN:VCARD',
@@ -19,11 +19,10 @@ const VCARD = [
   'EMAIL:steve@gipity.com',
   'ORG:Gipity Product Studio',
   'TITLE:Interim Tech Co-founder',
-  'URL:https://www.gipity.com',
+  'URL;TYPE=Homepage:https://www.gipity.com',
   'TEL;TYPE=CELL;TYPE=VOICE;TYPE=PREF:+447415978029',
   'URL;TYPE=WhatsApp:https://wa.me/447415978029',
   'URL;TYPE=LinkedIn:https://www.linkedin.com/in/stephencharlesprocter',
-  'NOTE:Website https://www.gipity.com | WhatsApp https://wa.me/447415978029 | LinkedIn https://www.linkedin.com/in/stephencharlesprocter',
   'END:VCARD',
 ].join('\r\n');
 
