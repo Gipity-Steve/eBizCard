@@ -2,7 +2,7 @@
 
 Remix eBizCard to create your own shareable digital contact card with a QR code containing your contact details.
 
-> eBizCard is designed to work offline. Save it to your phone’s Home Screen for quick access, and tap the card to save or share it as an image.
+> eBizCard is designed for the card owner to use privately, rather than as a URL to share with everyone. It gives you two ways to show your card: open eBizCard from your phone’s Home Screen, even when offline, or tap the card to save it as an image in Photos and show that image instead.
 
 ## How to build your card
 
@@ -16,7 +16,7 @@ Remix eBizCard to create your own shareable digital contact card with a QR code 
 ## Prompt for Replit Agent
 
 ```text
-Use this remixed eBizCard app to build my personal version. Start by asking me for my name, role, company, email, phone, website, WhatsApp, LinkedIn URL, logo or brand assets, and the website URL you should use as a styling reference. Do not guess anything that I have not provided. Use my details and the visual style of my site to update the full-screen card, readable contact details, vCard QR code, saved image, and offline version. After every iteration, check the result on a phone, make sure nothing is cut off, and bump the offline cache version so the latest update refreshes.
+Use this remixed eBizCard app to build my personal version. Start by asking me for my name, role, company, email, phone, website, WhatsApp, LinkedIn URL, logo or brand assets, the website URL you should use as a styling reference, and whether I want the card in portrait or landscape. Do not guess anything that I have not provided. Use my details, my preferred orientation, and the visual style of my site to update the full-screen card, readable contact details, vCard QR code, saved image, and offline version. After every iteration, check the result on a phone, make sure nothing is cut off, and bump the offline cache version so the latest update refreshes.
 ```
 
 ## Tips
