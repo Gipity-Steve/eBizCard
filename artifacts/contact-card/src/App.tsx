@@ -18,8 +18,12 @@ ORG:Gipity Product Studio
 TITLE:Interim Tech Co-founder
 URL:https://www.gipity.com
 TEL;TYPE=CELL;TYPE=VOICE;TYPE=PREF:+447415978029
-URL;TYPE=WhatsApp:https://wa.me/447415978029
-URL;TYPE=LinkedIn:https://www.linkedin.com/in/stephencharlesprocter
+URL:https://wa.me/447415978029
+URL:https://www.linkedin.com/in/stephencharlesprocter
+item1.URL:https://wa.me/447415978029
+item1.X-ABLabel:WhatsApp
+item2.URL:https://www.linkedin.com/in/stephencharlesprocter
+item2.X-ABLabel:LinkedIn
 END:VCARD`;
 
 const contact = {

@@ -25,3 +25,7 @@ Use this remixed eBizCard app to build my personal version. Start by asking me f
 - A logo file is helpful, but a website URL is enough to guide the visual style.
 - Scan the QR code with another phone to check that all your details are included.
 - If an update does not appear on your phone, open the card in Safari while online and refresh once.
+
+## Android contact imports
+
+Android Contacts apps do not all support named social-profile fields in the same way. eBizCard includes the website, WhatsApp, and LinkedIn destinations as standard URL entries for broader Android compatibility, with labelled companion fields for apps that support them. Some Android phones may show the links as generic website entries, hide custom labels, or require saving the contact before all fields appear.
