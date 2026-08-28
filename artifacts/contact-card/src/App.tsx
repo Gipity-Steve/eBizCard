@@ -9,19 +9,21 @@ import {
 import logoSrc from '@assets/g-dot-1024_1787901439446.png';
 import { encodeQr } from '@/lib/qr';
 
-const VCARD = `BEGIN:VCARD
-VERSION:3.0
-N:Procter;Steve;;;
-FN:Steve Procter
-EMAIL:steve@gipity.com
-ORG:Gipity Product Studio
-TITLE:Interim Tech Co-founder
-URL:https://www.gipity.com
-TEL;TYPE=CELL;TYPE=VOICE;TYPE=PREF:+447415978029
-URL;TYPE=WhatsApp:https://wa.me/447415978029
-URL;TYPE=LinkedIn:https://www.linkedin.com/in/stephencharlesprocter
-NOTE:Website: https://www.gipity.com\\nWhatsApp: https://wa.me/447415978029\\nLinkedIn: https://www.linkedin.com/in/stephencharlesprocter
-END:VCARD`;
+const VCARD = [
+  'BEGIN:VCARD',
+  'VERSION:3.0',
+  'N:Procter;Steve;;;',
+  'FN:Steve Procter',
+  'EMAIL:steve@gipity.com',
+  'ORG:Gipity Product Studio',
+  'TITLE:Interim Tech Co-founder',
+  'URL:https://www.gipity.com',
+  'TEL;TYPE=CELL;TYPE=VOICE;TYPE=PREF:+447415978029',
+  'URL;TYPE=WhatsApp:https://wa.me/447415978029',
+  'URL;TYPE=LinkedIn:https://www.linkedin.com/in/stephencharlesprocter',
+  'NOTE:Website https://www.gipity.com | WhatsApp https://wa.me/447415978029 | LinkedIn https://www.linkedin.com/in/stephencharlesprocter',
+  'END:VCARD',
+].join('\r\n');
 
 const contact = {
   name: 'Steve Procter',

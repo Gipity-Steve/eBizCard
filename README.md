@@ -28,6 +28,6 @@ Use this remixed eBizCard app to build my personal version. Start by asking me f
 
 ## Cross-device testing
 
-eBizCard has been tested on Android and iPhone. The Home Screen experience and QR scanning are intended to work on both, but vCard saving and field presentation can vary between devices and Contacts apps. Some inconsistencies may remain, such as URLs appearing in Notes rather than as dedicated fields.
+eBizCard has been tested on Android and iPhone. The Home Screen experience and QR scanning are intended to work on both, but vCard saving and field presentation can vary between devices and Contacts apps. The QR includes a plain-text Notes fallback with titled links, but some inconsistencies may remain, such as URLs appearing in Notes rather than as dedicated fields.
 
 Please report any issues to Steve at steve@gipity.com.
