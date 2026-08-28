@@ -186,16 +186,15 @@ button { font: inherit; -webkit-tap-highlight-color: transparent; }
 .qr-wrap {
   position: relative;
   z-index: 1;
-  margin: auto 0 28px;
-  display: grid;
-  grid-template-columns: min(42vw, 190px) 1fr;
-  align-items: center;
-  gap: 24px;
+  margin: auto 0 14px;
+  display: block;
 }
 .qr-box {
-  width: min(42vw, 190px);
-  height: min(42vw, 190px);
+  width: min(100%, clamp(220px, calc(100dvh - 520px), 360px));
+  height: auto;
+  aspect-ratio: 1;
   padding: 9px;
+  margin: 0 auto;
   background: #f7f3e7;
   border: 1px solid var(--line);
 }
@@ -204,38 +203,6 @@ button { font: inherit; -webkit-tap-highlight-color: transparent; }
   height: 100%;
   display: block;
   shape-rendering: crispEdges;
-}
-.qr-caption {
-  max-width: 360px;
-  margin: 0;
-  color: var(--ink-soft);
-  font-family: var(--font-mono);
-  font-size: clamp(11px, 3vw, 15px);
-  line-height: 1.55;
-  letter-spacing: .035em;
-  text-transform: uppercase;
-}
-.qr-caption strong {
-  display: block;
-  margin-bottom: 7px;
-  color: var(--ink);
-  font-family: var(--font-sans);
-  font-size: clamp(15px, 4vw, 21px);
-  letter-spacing: .01em;
-  text-transform: none;
-}
-.card-meta {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  margin: 0 0 4px;
-  color: var(--ink-soft);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: .06em;
-  text-transform: uppercase;
 }
 .toast {
   position: fixed;
@@ -262,22 +229,19 @@ button { font: inherit; -webkit-tap-highlight-color: transparent; }
     padding-left: max(18px, env(safe-area-inset-left));
     padding-right: max(18px, env(safe-area-inset-right));
   }
-  .card-header { gap: 14px; padding-top: 8px; }
-  .card-logo { width: 68px; height: 68px; flex-basis: 68px; }
+  .card-header { gap: 12px; padding-top: 8px; }
+  .card-logo { width: 62px; height: 62px; flex-basis: 62px; }
   .card-brand { font-size: 28px; }
   .card-brand small { margin-top: 6px; font-size: 9px; }
-  .card-introduction { padding-top: clamp(30px, 5vh, 52px); }
+  .card-introduction { padding-top: clamp(24px, 4vh, 40px); }
   .card-kicker { margin-bottom: 14px; font-size: 11px; }
   .card-introduction h1 { font-size: clamp(51px, 15vw, 72px); }
   .orange-rule { width: 112px; height: 5px; margin-top: 22px; }
-  .detail-list { margin-top: clamp(28px, 5vh, 44px); }
-  .detail-link { min-height: 53px; gap: 12px; font-size: clamp(14px, 4vw, 17px); }
+  .detail-list { margin-top: clamp(22px, 4vh, 36px); }
+  .detail-link { min-height: 47px; gap: 12px; font-size: clamp(14px, 4vw, 17px); }
   .detail-link svg { width: 20px; height: 20px; }
-  .qr-wrap { grid-template-columns: min(42vw, 174px) 1fr; gap: 16px; margin-bottom: 18px; }
-  .qr-box { width: min(42vw, 174px); height: min(42vw, 174px); padding: 7px; }
-  .qr-caption { font-size: clamp(10px, 2.8vw, 12px); }
-  .qr-caption strong { margin-bottom: 6px; font-size: clamp(14px, 4vw, 17px); }
-  .card-meta { margin-bottom: 0; font-size: 10px; }
+  .qr-wrap { margin-bottom: 10px; }
+  .qr-box { padding: 7px; }
 }
 @media (max-width: 470px) and (max-height: 740px) {
   .card-trigger {
@@ -295,17 +259,12 @@ button { font: inherit; -webkit-tap-highlight-color: transparent; }
   .detail-list { margin-top: 18px; }
   .detail-link { min-height: 40px; gap: 10px; font-size: 13px; }
   .detail-link svg { width: 17px; height: 17px; }
-  .qr-wrap { grid-template-columns: 112px 1fr; gap: 10px; margin-bottom: 5px; }
-  .qr-box { width: 112px; height: 112px; padding: 5px; }
-  .qr-caption { font-size: 9px; line-height: 1.4; }
-  .qr-caption strong { margin-bottom: 4px; font-size: 13px; }
-  .card-meta { font-size: 9px; }
+  .qr-wrap { margin-bottom: 5px; }
+  .qr-box { width: 128px; padding: 5px; }
 }
 @media (max-width: 380px) {
-  .qr-wrap { grid-template-columns: 112px 1fr; gap: 10px; margin-bottom: 5px; }
-  .qr-box { width: 112px; height: 112px; padding: 5px; }
-  .qr-caption { font-size: 9px; line-height: 1.4; }
-  .qr-caption strong { font-size: 13px; }
+  .qr-wrap { margin-bottom: 5px; }
+  .qr-box { width: 220px; padding: 7px; }
 }
 @media print {
   .page-shell { padding: 20px; }

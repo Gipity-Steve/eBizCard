@@ -105,7 +105,7 @@ function drawCardPng(
 ) {
   const scale = 2;
   const width = 1000;
-  const height = 1800;
+  const height = 2000;
   const canvas = document.createElement('canvas');
   canvas.width = width * scale;
   canvas.height = height * scale;
@@ -178,17 +178,7 @@ function drawCardPng(
     ctx.fillText(value, 145, lineY + 49);
   });
 
-  drawQr(ctx, matrix, 100, 1080, 480);
-  ctx.fillStyle = '#526b83';
-  ctx.font = '700 18px Arial, sans-serif';
-  ctx.fillText('POINT YOUR CAMERA HERE', 620, 1230);
-  ctx.font = '500 16px Arial, sans-serif';
-  ctx.fillText('The QR contains the full vCard', 620, 1270);
-  ctx.fillText('including Steve’s LinkedIn profile.', 620, 1300);
-  ctx.fillStyle = '#526b83';
-  ctx.font = '700 18px Arial, sans-serif';
-  ctx.fillText('GIPITY / 2026', 100, 1695);
-  ctx.fillText('STEVE.PROCTER', 760, 1695);
+  drawQr(ctx, matrix, 80, 1050, 840);
   ctx.restore();
 
   const dataUrl = canvas.toDataURL('image/png');
@@ -269,14 +259,6 @@ function Home() {
           </div>
           <div className="qr-wrap">
             <div className="qr-box"><QrCodeGraphic matrix={matrix} /></div>
-            <p className="qr-caption">
-              <strong>Save Steve’s details</strong>
-              Point your camera here. The QR has the full vCard.
-            </p>
-          </div>
-          <div className="card-meta">
-            <span>GIPITY / 2026</span>
-            <span>STEVE.PROCTER</span>
           </div>
         </button>
       </section>
