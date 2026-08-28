@@ -1,0 +1,17 @@
+{
+  "name": "Steve Procter — Contact Card",
+  "short_name": "Steve Procter",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#e8e4d8",
+  "theme_color": "#173b3a",
+  "description": "The private professional contact card for Steve Procter.",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

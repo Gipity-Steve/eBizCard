@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Steve Procter Contact Card"
+description = "A personal offline contact card that displays Steve Procter's vCard as a scannable QR code, provides a high-resolution image for Photos, and supports Home Screen installation for offline access."
+version = "1.0.0"
+id = "artifacts/contact-card"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24596
+
+[services.development]
+run = "pnpm --filter @workspace/contact-card run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/contact-card", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/contact-card/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24596"
+BASE_PATH = "/"
