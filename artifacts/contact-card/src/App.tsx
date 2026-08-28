@@ -1,11 +1,11 @@
 import { useMemo, useRef, useState } from 'react';
 import {
-  Check,
   Globe2,
   Mail,
   MessageCircle,
   Phone,
 } from 'lucide-react';
+import logoSrc from '@assets/g-dot-1024_1787901439446.png';
 import { encodeQr } from '@/lib/qr';
 
 const VCARD = `BEGIN:VCARD
@@ -33,6 +33,7 @@ const contact = {
 function QrCodeGraphic({ matrix }: { matrix: boolean[][] }) {
   const quiet = 4;
   const dimension = matrix.length + quiet * 2;
+
   return (
     <svg
       aria-label="QR code containing Steve Procter's contact details"
@@ -40,10 +41,19 @@ function QrCodeGraphic({ matrix }: { matrix: boolean[][] }) {
       viewBox={`0 0 ${dimension} ${dimension}`}
       role="img"
     >
-      <rect width={dimension} height={dimension} fill="#f8f5eb" />
+      <rect width={dimension} height={dimension} fill="#f7f3e7" />
       {matrix.map((row, rowIndex) =>
         row.map((dark, colIndex) =>
-          dark ? <rect key={`${rowIndex}-${colIndex}`} x={colIndex + quiet} y={rowIndex + quiet} width="1" height="1" fill="#142b2b" /> : null,
+          dark ? (
+            <rect
+              key={`${rowIndex}-${colIndex}`}
+              x={colIndex + quiet}
+              y={rowIndex + quiet}
+              width="1"
+              height="1"
+              fill="#111817"
+            />
+          ) : null,
         ),
       )}
     </svg>
@@ -61,74 +71,152 @@ function downloadBlob(blob: Blob, filename: string) {
   window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-function drawQr(ctx: CanvasRenderingContext2D, matrix: boolean[][], x: number, y: number, side: number) {
-  const quiet = 4;
-  const unit = side / (matrix.length + quiet * 2);
-  ctx.fillStyle = '#f8f5eb';
-  ctx.fillRect(x, y, side, side);
-  ctx.fillStyle = '#142b2b';
-  matrix.forEach((row, rowIndex) => row.forEach((dark, colIndex) => {
-    if (dark) ctx.fillRect(x + (colIndex + quiet) * unit, y + (rowIndex + quiet) * unit, Math.ceil(unit), Math.ceil(unit));
-  }));
+function downloadDataUrl(dataUrl: string, filename: string) {
+  const anchor = document.createElement('a');
+  anchor.href = dataUrl;
+  anchor.download = filename;
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
 }
 
-function drawCardPng(matrix: boolean[][], onSaved?: () => void) {
+function drawQr(
+  ctx: CanvasRenderingContext2D,
+  matrix: boolean[][],
+  x: number,
+  y: number,
+  side: number,
+) {
+  const quiet = 4;
+  const unit = side / (matrix.length + quiet * 2);
+  ctx.fillStyle = '#f7f3e7';
+  ctx.fillRect(x, y, side, side);
+  ctx.fillStyle = '#111817';
+  matrix.forEach((row, rowIndex) =>
+    row.forEach((dark, colIndex) => {
+      if (dark) {
+        ctx.fillRect(
+          x + (colIndex + quiet) * unit,
+          y + (rowIndex + quiet) * unit,
+          Math.ceil(unit),
+          Math.ceil(unit),
+        );
+      }
+    }),
+  );
+}
+
+function drawCardPng(
+  matrix: boolean[][],
+  logo: HTMLImageElement | null,
+  onSaved?: () => void,
+) {
   const scale = 2;
-  const width = 1800;
-  const height = 1160;
+  const width = 1000;
+  const height = 1400;
   const canvas = document.createElement('canvas');
   canvas.width = width * scale;
   canvas.height = height * scale;
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
-  ctx.scale(scale, scale);
 
-  ctx.fillStyle = '#e8e4d8';
+  ctx.save();
+  ctx.scale(scale, scale);
+  ctx.fillStyle = '#f1eee3';
   ctx.fillRect(0, 0, width, height);
-  ctx.fillStyle = '#173b3a';
-  ctx.fillRect(122, 170, 670, 820);
-  ctx.fillStyle = '#f7f4ea';
-  ctx.fillRect(792, 170, 886, 820);
-  ctx.fillStyle = '#c9d97a';
-  ctx.font = '800 22px "Avenir Next", sans-serif';
-  ctx.fillText('GIPITY PRODUCT STUDIO', 164, 222);
-  ctx.strokeStyle = 'rgba(243,240,230,.6)';
-  ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.arc(200, 840, 54, 0, Math.PI * 2); ctx.stroke();
-  ctx.fillStyle = '#f3f0e6';
-  ctx.font = '400 45px Georgia, serif';
-  ctx.fillText('SP', 174, 855);
-  ctx.fillStyle = '#f7f4ea';
-  ctx.font = '400 75px Georgia, serif';
-  ctx.fillText('Steve', 848, 275);
-  ctx.fillText('Procter', 848, 350);
-  ctx.fillStyle = '#b9432e';
-  ctx.font = '800 21px "Avenir Next", sans-serif';
-  ctx.fillText('INTERIM TECH CO-FOUNDER', 850, 405);
-  ctx.strokeStyle = 'rgba(20,43,43,.18)';
+
+  ctx.strokeStyle = 'rgba(70, 91, 112, .1)';
   ctx.lineWidth = 1;
-  [450, 520, 590, 660].forEach((lineY) => { ctx.beginPath(); ctx.moveTo(850, lineY); ctx.lineTo(1600, lineY); ctx.stroke(); });
-  ctx.fillStyle = '#142b2b';
-  ctx.font = '650 24px "Avenir Next", sans-serif';
-  ctx.fillText(contact.email, 895, 493);
-  ctx.fillText(contact.phone, 895, 563);
-  ctx.fillText(contact.website, 895, 633);
-  drawQr(ctx, matrix, 1380, 700, 230);
-  ctx.fillStyle = '#3e5852';
-  ctx.font = '700 16px "Avenir Next", sans-serif';
-  ctx.fillText('SCAN TO SAVE', 1383, 960);
-  canvas.toBlob((blob) => {
-    if (blob) {
-      downloadBlob(blob, 'steve-procter-contact-card.png');
+  for (let x = 0; x <= width; x += 32) {
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, height);
+    ctx.stroke();
+  }
+  for (let y = 0; y <= height; y += 32) {
+    ctx.beginPath();
+    ctx.moveTo(0, y);
+    ctx.lineTo(width, y);
+    ctx.stroke();
+  }
+
+  ctx.fillStyle = '#fbf8ef';
+  ctx.fillRect(55, 55, 890, 1290);
+  ctx.strokeStyle = 'rgba(17, 24, 23, .16)';
+  ctx.strokeRect(55.5, 55.5, 889, 1289);
+
+  if (logo?.complete && logo.naturalWidth > 0) {
+    ctx.drawImage(logo, 100, 88, 92, 92);
+  }
+  ctx.fillStyle = '#111817';
+  ctx.font = '800 30px Arial, sans-serif';
+  ctx.fillText('GIPITY.', 100, 155);
+  ctx.fillStyle = '#ff5d0a';
+  ctx.fillText('.', 228, 155);
+  ctx.fillStyle = '#526b83';
+  ctx.font = '500 18px Arial, sans-serif';
+  ctx.fillText('PRODUCT STUDIO', 100, 188);
+
+  ctx.fillStyle = '#111817';
+  ctx.font = '400 76px Georgia, serif';
+  ctx.fillText('Steve', 100, 365);
+  ctx.fillText('Procter', 100, 445);
+  ctx.fillStyle = '#526b83';
+  ctx.font = '700 22px Arial, sans-serif';
+  ctx.fillText('INTERIM TECH CO-FOUNDER', 103, 500);
+
+  ctx.strokeStyle = '#ff5d0a';
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.moveTo(100, 535);
+  ctx.bezierCurveTo(280, 526, 480, 545, 680, 532);
+  ctx.stroke();
+
+  ctx.strokeStyle = 'rgba(17, 24, 23, .18)';
+  ctx.lineWidth = 1;
+  [625, 705, 785].forEach((lineY) => {
+    ctx.beginPath();
+    ctx.moveTo(100, lineY);
+    ctx.lineTo(900, lineY);
+    ctx.stroke();
+  });
+  ctx.fillStyle = '#111817';
+  ctx.font = '600 24px Arial, sans-serif';
+  ctx.fillText(contact.email, 145, 674);
+  ctx.fillText(contact.phone, 145, 754);
+  ctx.fillText(contact.website, 145, 834);
+
+  drawQr(ctx, matrix, 300, 910, 400);
+  ctx.fillStyle = '#526b83';
+  ctx.font = '700 18px Arial, sans-serif';
+  ctx.fillText('POINT YOUR CAMERA HERE', 300, 1350);
+  ctx.restore();
+
+  const dataUrl = canvas.toDataURL('image/png');
+  const base64 = dataUrl.split(',')[1];
+  const binary = atob(base64);
+  const bytes = Uint8Array.from(binary, (character) => character.charCodeAt(0));
+  const file = new File([bytes], 'steve-procter-contact-card.png', { type: 'image/png' });
+  const shareData = { files: [file], title: "Steve Procter's contact card" };
+
+  if (navigator.share && navigator.canShare?.({ files: [file] })) {
+    void navigator.share(shareData).then(() => onSaved?.()).catch((error: unknown) => {
+      if (error instanceof DOMException && error.name === 'AbortError') return;
+      downloadDataUrl(dataUrl, 'steve-procter-contact-card.png');
       onSaved?.();
-    }
-  }, 'image/png');
+    });
+    return;
+  }
+
+  downloadDataUrl(dataUrl, 'steve-procter-contact-card.png');
+  onSaved?.();
 }
 
 function Home() {
   const matrix = useMemo(() => encodeQr(VCARD), []);
   const [toast, setToast] = useState('');
   const toastTimer = useRef<number | undefined>(undefined);
+  const logoRef = useRef<HTMLImageElement>(null);
 
   const notify = (message: string) => {
     setToast(message);
@@ -144,42 +232,57 @@ function Home() {
           data-testid="card-contact"
           type="button"
           aria-label="Save Steve Procter's contact card as a PNG image"
-          onClick={() => drawCardPng(matrix, () => notify('Card image saved'))}
+          onClick={() => drawCardPng(matrix, logoRef.current, () => notify('Card image ready to save'))}
         >
-          <div className="card-side">
-            <div className="brand">Gipity<br />Product Studio</div>
-            <div className="monogram" aria-hidden="true">SP</div>
-            <p className="side-label">Technology, thoughtfully applied</p>
+          <div className="card-header">
+            <img ref={logoRef} className="card-logo" src={logoSrc} alt="" />
+            <div className="card-brand">
+              <span>Gipity<span className="orange-dot">.</span></span>
+              <small>Product Studio</small>
+            </div>
           </div>
-          <div className="card-main">
-            <div>
-              <h2 className="card-name" data-testid="text-contact-name">{contact.name}</h2>
-              <p className="card-role" data-testid="text-contact-role">{contact.role}</p>
+          <div className="card-introduction">
+            <p className="card-kicker">Your interim tech co-founder</p>
+            <h1 data-testid="text-contact-name">{contact.name}</h1>
+            <div className="orange-rule" aria-hidden="true" />
+          </div>
+          <div className="detail-list">
+            <div className="detail-link" data-testid="link-email">
+              <Mail size={18} strokeWidth={1.7} />
+              <span>{contact.email}</span>
             </div>
-            <div className="detail-list">
-              <div className="detail-link" data-testid="link-email">
-                <Mail size={16} strokeWidth={1.8} /><span>{contact.email}</span>
-              </div>
-              <div className="detail-link" data-testid="link-phone">
-                <Phone size={16} strokeWidth={1.8} /><span>{contact.phone}</span>
-              </div>
-              <div className="detail-link" data-testid="link-website">
-                <Globe2 size={16} strokeWidth={1.8} /><span>{contact.website}</span>
-              </div>
-              <div className="detail-link" data-testid="link-whatsapp">
-                <MessageCircle size={16} strokeWidth={1.8} /><span>{contact.whatsapp}</span>
-              </div>
+            <div className="detail-link" data-testid="link-phone">
+              <Phone size={18} strokeWidth={1.7} />
+              <span>{contact.phone}</span>
             </div>
-            <div className="qr-wrap">
-              <div className="qr-box"><QrCodeGraphic matrix={matrix} /></div>
-              <p className="qr-caption"><strong>Save Steve’s details</strong>Point your camera here. The QR has the full vCard.</p>
+            <div className="detail-link" data-testid="link-website">
+              <Globe2 size={18} strokeWidth={1.7} />
+              <span>{contact.website}</span>
             </div>
-            <div className="card-meta"><span>GIPITY / 2025</span><span>STEVE.PROCTER</span></div>
+            <div className="detail-link" data-testid="link-whatsapp">
+              <MessageCircle size={18} strokeWidth={1.7} />
+              <span>{contact.whatsapp}</span>
+            </div>
+          </div>
+          <div className="qr-wrap">
+            <div className="qr-box"><QrCodeGraphic matrix={matrix} /></div>
+            <p className="qr-caption">
+              <strong>Save Steve’s details</strong>
+              Point your camera here. The QR has the full vCard.
+            </p>
+          </div>
+          <div className="card-meta">
+            <span>GIPITY / 2026</span>
+            <span>STEVE.PROCTER</span>
           </div>
         </button>
       </section>
 
-      {toast ? <div className="toast" data-testid="status-toast" role="status"><Check size={15} /> {toast}</div> : null}
+      {toast ? (
+        <div className="toast" data-testid="status-toast" role="status">
+          {toast}
+        </div>
+      ) : null}
     </main>
   );
 }
