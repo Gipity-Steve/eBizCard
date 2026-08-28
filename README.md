@@ -26,6 +26,8 @@ Use this remixed eBizCard app to build my personal version. Start by asking me f
 - Scan the QR code with another phone to check that all your details are included.
 - If an update does not appear on your phone, open the card in Safari while online and refresh once.
 
-## Android contact imports
+## Cross-device testing
 
-Android Contacts apps do not all support named social-profile fields in the same way. eBizCard includes the website, WhatsApp, and LinkedIn destinations as standard URL entries for broader Android compatibility, with labelled companion fields for apps that support them. Some Android phones may show the links as generic website entries, hide custom labels, or require saving the contact before all fields appear.
+eBizCard has been tested on Android and iPhone. The Home Screen experience and QR scanning are intended to work on both, but vCard saving and field presentation can vary between devices and Contacts apps. Some inconsistencies may remain, such as URLs appearing in Notes rather than as dedicated fields.
+
+Please report any issues to Steve at steve@gipity.com.
