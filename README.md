@@ -16,7 +16,7 @@ Remix eBizCard to create your own shareable digital contact card with a QR code 
 ## Prompt for Replit Agent
 
 ```text
-Use this remixed eBizCard app to build my personal version. Start by asking me for my name, role, company, email, phone, website, WhatsApp, LinkedIn URL, logo or brand assets, the website URL you should use as a styling reference, and whether I want the card in portrait or landscape. Do not guess anything that I have not provided. Use my details, my preferred orientation, and the visual style of my site to update the full-screen card, readable contact details, vCard QR code, saved image, and offline version. After every iteration, check the result on a phone, make sure nothing is cut off, and bump the offline cache version so the latest update refreshes.
+Use this remixed eBizCard app to build my personal version. Start by asking me for my name, role, company, email, phone, website, WhatsApp, LinkedIn URL, logo or app icon, other brand assets, the website URL you should use as a styling reference, and whether I want the card in portrait or landscape. Do not guess anything that I have not provided. Use my details, my preferred orientation, my icon, and the visual style of my site to update the full-screen card, readable contact details, vCard QR code, saved image, favicon, iPhone Home Screen icon, and offline version. After every iteration, check the result on a phone, make sure nothing is cut off, and bump the offline cache version so the latest update refreshes.
 ```
 
 ## Tips
